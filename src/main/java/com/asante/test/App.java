@@ -8,6 +8,7 @@ public class App
     public static void main( String[] args ) throws IOException
     {
         System.out.println( "Inverted Index" );
+        
         Index index = new Index();
         index.buildIndex(new String[]{
         		"A brilliant, festive study of JS Bach uses literature and painting to illuminate his 'dance-impregnated' music, writes Peter Conrad"
@@ -20,6 +21,7 @@ public class App
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String pattern = input.readLine();
         Object[] results = index.get(pattern).toArray();
+        
         System.out.println(results.length);
         System.out.println(Arrays.toString(results));
     }
