@@ -3,7 +3,8 @@ package com.asante.test;
 import java.util.*;
 
 /**
- * La clase parse una lista de strings para luego indexar sus palabras de modo inverso
+ * La clase parse una lista de strings para luego indexar sus palabras de modo
+ * inverso
  * 
  * @author mcamelli
  *
@@ -29,7 +30,7 @@ public class Index {
 
 			String[] words = dataString.split("\\W+");
 			for (String word : words) {
-				word = word.toLowerCase();
+
 				if (!dataIndex.containsKey(word))
 					dataIndex.put(word, new HashSet<Integer>());
 				dataIndex.get(word).add(i);
@@ -44,20 +45,25 @@ public class Index {
 	 * 
 	 * @return lista de strings donde se encontro el patron de busqueda
 	 */
-	public List<String> get(String pattern){
+	public List<String> get(String pattern) {
 		List<String> strings = new ArrayList<String>();
-		HashSet<Integer> res = new HashSet<Integer>(dataIndex.get(pattern.toLowerCase()));
+		HashSet<Integer> idx = dataIndex.get(pattern);
+
+		if (idx == null) {
+			return null;
+		}
+
+		HashSet<Integer> res = new HashSet<Integer>(idx);
 		res.retainAll(dataIndex.get(pattern));
 
-        if(res.size()==0) {
-            return null;
-        }
-        
-        System.out.println("Pattern found: ");
-        for(int num : res){
-        	strings.add(dataSources.get(num));
-        }
-        
-        return strings;
-    }
+		if (res.size() == 0) {
+			return null;
+		}
+
+		for (int num : res) {
+			strings.add(dataSources.get(num));
+		}
+
+		return strings;
+	}
 }

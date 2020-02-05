@@ -20,9 +20,14 @@ public class App
         System.out.println("Pattern to search: ");
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String pattern = input.readLine();
-        Object[] results = index.get(pattern).toArray();
+        Object[] results;
+		try {
+			results = index.get(pattern).toArray();
+			System.out.println(results.length);
+			System.out.println(Arrays.toString(results));
+		} catch (Exception e) {
+			System.out.println("Pattern not found");
+		}
         
-        System.out.println(results.length);
-        System.out.println(Arrays.toString(results));
     }
 }
